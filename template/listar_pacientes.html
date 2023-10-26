@@ -1,0 +1,48 @@
+{% include("cabeceraadmin.html") %}
+
+<!------LISTA DE PACIENTE---->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+  .caja{
+      margin: 2%;
+      margin-left: 35%;
+      margin-right: 35%;
+  }
+  .t{
+    font-family: 'Lobster', cursive;
+  }
+  </style>
+
+{% if paciente %}
+
+    <h1 class="text-center t">Lista de Pacientes</h1>
+<div class="caja">
+<table class="table table-striped">
+    <thead class="table-dark ">
+      <tr>
+        <th scope="col">Nº</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Cel</th>
+        <th scope="col">Direccion</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for mostrar in paciente %}
+      <tr>
+        <th scope="row"> {{mostrar.id}}</th>
+        <td> {{mostrar.nombre}} </td>
+        <td>{{mostrar.apellido}}</td>
+        <td>{{mostrar.DNI}}</td>
+        <td>{{mostrar.cel}}</td>
+        <td>{{mostrar.direccion}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>no hay datos</p>
+{% endif %}
+</div>
+<!-------------FIN-->

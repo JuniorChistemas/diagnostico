@@ -1,0 +1,51 @@
+{% include("cabecerausuario.html") %}
+
+<!-- FORMULARIO DE REGISTRO PACIENTES -->
+<div class="caja">
+    <form class="form-control" action="registro-paciente" method="post">
+        <h1 class="text-center t">Registro de Pacientes</h1>
+        {% if mensaje %}
+            {% if registro_exitoso %}
+                <div class="alert alert-success" class="alert" id="alerta" role="alert">
+                    {{ mensaje }}
+                </div>
+            {% else %}
+                <div class="alert alert-danger" class="alert" id="alerta" role="alert">
+                    {{ mensaje }}
+                </div>
+            {% endif %}
+        {% endif %}
+        <div class="form-group">
+            <label for="valorNormal" class="t text-center">Nombre</label>
+            <input type="text" class="form-control" id="txtnombre" placeholder="Ingresa tu nombre" name="txtnombre">
+        </div>
+        <div class="form-group">
+            <label for="valorNormal" class="t text-center">Apellido</label>
+            <input type="text" class="form-control" id="txtapellido" placeholder="Ingrese tus apellidos" name="txtapellido">
+        </div>
+        <div class="form-group">
+            <label for="valorNormal" class="t text-center">DNI</label>
+            <input type="text" class="form-control" id="txtdni" placeholder="Ingrese tu DNI" name="txtdni">
+        </div>
+        <div class="form-group">
+            <label for="valorNormal" class="t text-center">Cel</label>
+            <input type="text" class="form-control" id="txtcel" placeholder="Ingrese tu número de celular" name="txtcel">
+        </div>
+        <div class="form-group">
+            <label for="valorNormal" class="t text-center">Direccion</label>
+            <input type="text" class="form-control" id="txtdireccion" placeholder="Ingrese tu dirección" name="txtdireccion">
+        </div>
+        <br>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Registrar</button>
+        </div>
+    </form>
+</div>
+<script>
+    // Función para ocultar la alerta después de 5 segundos
+    setTimeout(function() {
+        document.getElementById("alerta").style.display = "none";
+    }, 3000); //  3000 (3 segundos) 
+</script>
+
+<!-- FIN -->
