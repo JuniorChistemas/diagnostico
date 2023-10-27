@@ -1,11 +1,10 @@
-
-{% include ('cabecera.html') %}
+{% include ('/templates/cabecera.html') %}
 <!--LOGIN-->
 <div class="caja">
     <form class="form-control" action="acceso-login" method="post">
         <!---alertas-->
           <!----------->
-        <h1 class="text-center t">Login</h1>
+        <h1 class="text-center t">Login inicial</h1>
         {% if mensaje %}
         <div class="alert alert-danger" role="alert">
             {{ mensaje}}
@@ -37,4 +36,5 @@
 <!---FIN DE LOGIN-->
 </div>
 </body>
+{% include ('/templates/pie.html') %}
 </html>

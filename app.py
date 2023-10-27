@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template, request, redirect, Response, url_for, session
 from flask_mysqldb import MySQL,MySQLdb # pip install Flask-MySQLdb
 
-app = Flask(__name__,template_folder='template')
+app = Flask(__name__,template_folder='views')
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -15,11 +15,12 @@ mysql = MySQL(app)
 
 @app.route('/')
 def home():
+    session['id_rol']=0
     return render_template('index.html')   
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')   
+    return render_template('Admin/admin.html')   
 
 @app.route('/perfil')
 def perfil():
@@ -44,9 +45,9 @@ def login():
             session['id_rol']=account['id_rol']
             
             if session['id_rol']==1:
-                return render_template("admin.html")
+                return render_template("Admin/admin.html")
             elif session ['id_rol']==2:
-                return render_template("usuario.html")
+                return render_template("User/usuario.html")
         else:
             return render_template('index.html',mensaje="Usuario O Contraseña Incorrectas")
 
@@ -125,7 +126,7 @@ def listar():
     usuarios = cur.fetchall()
     cur.close()
     
-    return render_template("listar_usuarios.html",usuarios=usuarios)
+    return render_template("Admin/listar_usuarios.html",usuarios=usuarios)
 
 #-----LISTAR PACIENTES-------------
 @app.route('/listarpacientes', methods= ["GET", "POST"])

@@ -1,23 +1,25 @@
-{% include("cabeceraadmin.html") %}
+{% include ('/templates/cabecera.html') %}
 
 <!------LISTA DE USUARIOS---->
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-  .caja{
-      margin: 2%;
-      margin-left: 35%;
-      margin-right: 35%;
+  @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+  .caja {
+    margin: 2%;
+    margin-left: 35%;
+    margin-right: 35%;
   }
-  .t{
+
+  .t {
     font-family: 'Lobster', cursive;
   }
-  </style>
+</style>
 
 {% if usuarios %}
 
-    <h1 class="text-center t">Lista de Usuarios</h1>
+<h1 class="text-center t">Lista de Usuarios</h1>
 <div class="caja">
-<table class="table table-striped">
+  <table class="table table-striped">
     <thead class="table-dark ">
       <tr>
         <th scope="col">Nº</th>
@@ -26,7 +28,7 @@
       </tr>
     </thead>
     <tbody>
-        {% for mostrar in usuarios %}
+      {% for mostrar in usuarios %}
       <tr>
         <th scope="row"> {{mostrar.id}}</th>
         <td> {{mostrar.correo}} </td>
@@ -37,6 +39,7 @@
   </table>
   {% else %}
   <p>no hay datos</p>
-{% endif %}
+  {% endif %}
 </div>
+{% include ('/templates/pie.html') %}
 <!-------------FIN-->
