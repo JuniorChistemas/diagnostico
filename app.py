@@ -24,11 +24,11 @@ def admin():
 
 @app.route('/perfil')
 def perfil():
-    return render_template('perfil.html')  
+    return render_template('User/perfil.html')  
 
 @app.route('/reportes')
 def reporte():
-    return render_template('reportes.html')  
+    return render_template('User/reportes.html')  
 
 # ACCESO---LOGIN
 @app.route('/acceso-login', methods= ["GET", "POST"])
@@ -72,25 +72,25 @@ def crear_registro():
 #Registro-diagnostico
 @app.route('/registrodiagnostico')
 def registrodiag():
-    return render_template('registrodiagnostico.html')  
+    return render_template('User/diagnostico.html')  
 
 @app.route('/crear-registro2', methods= ["GET", "POST"])
 def crear_registro_diag(): 
     
     paciente=request.form['txtpaciente']
     usuario=request.form['txtusuario']
-    fecha=request.form['txtusuario']
+    fecha=request.form['txtfecha']
     diagnostico=request.form['txtdiagnostico']
     cur = mysql.connection.cursor()
-    cur.execute(" INSERT INTO diagnostico (id_paciente, id_usuario, fecha_atencion, diagnostico) VALUES (%s, %s, %s, %s)",(paciente,usuario,fecha,diagnostico))
+    cur.execute(" INSERT INTO historia_clinica (id_paciente, id_usuario, fecha_atencion, Diagnostico) VALUES (%s, %s, %s, %s)",(paciente,usuario,fecha,diagnostico))
     mysql.connection.commit()
     
-    return render_template("registrodiagnostico.html",mensaje="Diagnostico Registrado Exitosamente")
+    return render_template("User/diagnostico.html",mensaje="Diagnostico Registrado Exitosamente")
 
 #Registro-pacientes
 @app.route('/registropacientes')
 def registropaciente():
-    return render_template('registropaciente.html')  
+    return render_template('User/paciente.html')  
 
 @app.route('/registro-paciente', methods=["GET", "POST"])
 def crear_registro_paciente():
@@ -136,7 +136,7 @@ def listarpacientes():
     paciente = cur.fetchall()
     cur.close()
     
-    return render_template("listar_pacientes.html",paciente=paciente)
+    return render_template("Admin/listar_pacientes.html",paciente=paciente)
 
 
 #----------------------------------
