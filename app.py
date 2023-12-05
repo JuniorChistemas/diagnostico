@@ -13,9 +13,9 @@ app = Flask(__name__,template_folder='views')
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '19151423' #agregue mi contraseña
+app.config['MYSQL_PASSWORD'] = '' #agregue mi contraseña
 app.config['MYSQL_DB'] = 'proyectorn'
-app.config['MYSQL_PORT'] = 3306  # Añade esta línea @@@JUNIOR: CAMBIE DE PUERTO 
+app.config['MYSQL_PORT'] = 3304  # Añade esta línea @@@JUNIOR: CAMBIE DE PUERTO 
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
@@ -175,10 +175,33 @@ def listarpacientes():
     cur.close()
     
     return render_template("Admin/listar_pacientes.html",paciente=paciente)
+#-----GENERAR RECETA-------------
+@app.route('/Receta', methods=["GET", "POST"])
+def GenerarReceta():
+    receta = None
+    
+    if request.method == "POST":
+        dni = request.form.get("dni")
+        
+        cur = mysql.connection.cursor()
+        cur.execute("""
+            SELECT concat_ws(' ', p.nombre, p.apellido) AS Paciente, p.DNI, p.cel, p.direccion, 
+                   d.fecha_atencion, e.nomEnfermedad AS Enfermedad, t.nomTratamiento AS Tratamiento, 
+                   t.receta, u.nombre as Doctor 
+            FROM paciente p  
+            INNER JOIN diagnostico d ON p.id = d.id 
+            INNER JOIN enfermedad e ON e.idEnfermedad = d.id_Enfermedad 
+            INNER JOIN tratamiento t ON t.idTratamiendo = e.id_Tratamiento 
+            INNER JOIN usuarios u ON u.id = d.id_usuario 
+            WHERE p.DNI = %s
+        """, (dni,))
+        
+        receta = cur.fetchall()
+        cur.close()
+    # Si es una solicitud GET o POST, simplemente renderiza la plantilla
+    return render_template("User/reportes.html", receta=receta)
 
-
-#----------------------------------
-
+#------------------------------------
 if __name__ == '__main__':
     app.secret_key = "pinchellave"
     app.run(debug=True, host='0.0.0.0', port=5000, threaded=True)
