@@ -153,20 +153,20 @@ def predict():
     prediction_as_int = int(prediction_original_scale[0])
     resultado_mapa = {
         0: 'Resfriado común',
-        1: 'Gripe (Influenza)',
+        1: 'Tuberculosis',
         2: 'Asma',
         3: 'Enfermedad pulmonar obstructiva crónica ',
         4: 'Neumonía',
         5: 'Bronquitis aguda',
-        6: 'Tuberculosis',
+        6: 'Gripe (Influenza)',
         7: 'Fibrosis pulmonar',
         8: 'Apnea del sueño',
         9: 'Rinitis alérgica',
     }
     resultado_correspondiente = resultado_mapa.get(prediction_as_int, 'Resultado no definido')
     # Puedes devolver el resultado como parte de la respuesta
-    return f'Resultado correspondiente: {resultado_correspondiente}'
-
+    #return f'Resultado correspondiente: {resultado_correspondiente}'
+    return render_template("User/predicion.html", prediccion=resultado_correspondiente)
 
 
 #-----LISTAR USUARIOS-------------
