@@ -14,7 +14,7 @@ app = Flask(__name__,template_folder='views')
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = '19151423' #agregue mi contraseña
-app.config['MYSQL_DB'] = 'proyectorn'
+app.config['MYSQL_DB'] = 'proyectorn2'
 app.config['MYSQL_PORT'] = 3306  # Añade esta línea @@@JUNIOR: CAMBIE DE PUERTO 
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
@@ -150,9 +150,22 @@ def predict():
     # Si has normalizado los datos de salida, deshaz la normalización
     # En este caso, supongo que tus datos de salida están en el rango de 0 a 10
     prediction_original_scale = prediction * 10.0
-    
-    # Puedes hacer algo con la predicción, como mostrarla en una nueva página
-    return f'Predicción: {prediction_original_scale[0]}'
+    prediction_as_int = int(prediction_original_scale[0])
+    resultado_mapa = {
+        0: 'Resfriado común',
+        1: 'Gripe (Influenza)',
+        2: 'Asma',
+        3: 'Enfermedad pulmonar obstructiva crónica ',
+        4: 'Neumonía',
+        5: 'Bronquitis aguda',
+        6: 'Tuberculosis',
+        7: 'Fibrosis pulmonar',
+        8: 'Apnea del sueño',
+        9: 'Rinitis alérgica',
+    }
+    resultado_correspondiente = resultado_mapa.get(prediction_as_int, 'Resultado no definido')
+    # Puedes devolver el resultado como parte de la respuesta
+    return f'Resultado correspondiente: {resultado_correspondiente}'
 
 
 
