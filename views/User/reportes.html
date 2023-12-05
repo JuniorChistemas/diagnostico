@@ -1,4 +1,53 @@
-{% include ('/templates/cabecera.html') %}
+{% include '/templates/cabecera.html' %}
 
+<body>
+    <div class="container mt-4">
+        <form method="post" action="{{ url_for('GenerarReceta') }}" class="mb-4">
+            <label for="dni" class="form-label">Ingrese DNI:</label>
+            <div class="input-group">
+                <input type="text" name="dni" id="dni" class="form-control" required>
+                <button type="submit" class="btn btn-primary">Generar Receta</button>
+            </div>
+        </form>
+
+        {% if receta %}
+            <!-- Mostrar los resultados de la receta con Bootstrap -->
+            <div class="mb-4">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>DNI</th>
+                            <th>Celular</th>
+                            <th>Dirección</th>
+                            <th>Fecha de Atención</th>
+                            <th>Enfermedad</th>
+                            <th>Tratamiento</th>
+                            <th>Receta</th>
+                            <th>Doctor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ receta[0]['Paciente'] }}</td>
+                            <td>{{ receta[0]['DNI'] }}</td>
+                            <td>{{ receta[0]['cel'] }}</td>
+                            <td>{{ receta[0]['direccion'] }}</td>
+                            <td>{{ receta[0]['fecha_atencion'] }}</td>
+                            <td>{{ receta[0]['Enfermedad'] }}</td>
+                            <td>{{ receta[0]['Tratamiento'] }}</td>
+                            <td>{{ receta[0]['receta'] }}</td>
+                            <td>{{ receta[0]['Doctor'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-end">
+                <button class="btn btn-success" onclick="window.print()">Imprimir</button>
+            </div>
+        {% endif %}
+    </div>
 </body>
-{% include ('/templates/pie.html') %}
+
+{% include '/templates/pie.html' %}
