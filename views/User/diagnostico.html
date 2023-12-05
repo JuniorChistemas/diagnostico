@@ -133,7 +133,7 @@
         }
     }
 </style>
-<form class="form  mt-5 mb-5" action="crear-registro2" method="post">
+<form class="form  mt-5 mb-5" action="/predict" method="get">
     <p class="title">Registro</p>
     <p class="message">Los datos estan almacenados en la base de datos y puede observarlo el administrador</p>
     {% if mensaje %}
@@ -142,24 +142,71 @@
     </div>
 {% endif %}
     <div class="flex">
-        <label class="m-2 w-60">
-            <input required="" placeholder="" type="number" class="input" id="txtpaciente" name="txtpaciente">
-            <span>Paciente</span>
+        <label class="m-2 w-80">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_1" name="sintoma_1" min="0" max="1" step="1">
+            <span>Congestion</span>
         </label>
         <label class="m-2 w-60">
-            <input required="" placeholder="" type="number" class="input" id="txtusuario" name="txtusuario">
-            <span>Doctor</span>
+            <input required="" placeholder="" type="number" class="input" id="sintoma_2" name="sintoma_2" min="0" max="1" step="1">
+            <span>Fiebre</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_3" name="sintoma_3" min="0" max="1" step="1">
+            <span>D. garganta</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_4" name="sintoma_4" min="0" max="1" step="1">
+            <span>Malestar.G</span>
         </label>
     </div>
     <div class="flex">
         <label class="m-2 w-60">
-            <input required="" placeholder="" type="date" class="input" id="txtfecha" name="txtfecha">
-            <!-- <span>Fecha</span> -->
+            <input required="" placeholder="" type="number" class="input" id="sintoma_5" name="sintoma_5" min="0" max="1" step="1">
+            <span>Sudores</span>
         </label>
         <label class="m-2 w-60">
-            <input required="" placeholder="" type="text" class="input" id="txtdiagnostico" name="txtdiagnostico"> 
-            <span>diagnostico</span>
+            <input required="" placeholder="" type="number" class="input" id="sintoma_6" name="sintoma_6" min="0" max="1" step="1">
+            <span>Perdida.P</span>
         </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_7" name="sintoma_7" min="0" max="1" step="1">
+            <span>Falta.Ap</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_8" name="sintoma_8" min="0" max="1" step="1">
+            <span>D.Cabeza</span>
+        </label>
+    </div>
+    <div class="flex">
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_9" name="sintoma_9" min="0" max="1" step="1">
+            <span>Nauceas</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_10" name="sintoma_10" min="0" max="1" step="1">
+            <span>Tos</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_11" name="sintoma_11" min="0" max="1" step="1">
+            <span>D.Respirar</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_12" name="sintoma_12" min="0" max="1" step="1">
+            <span>sibilancia</span>
+        </label>
+    </div>
+    <div class="flex">
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_13" name="sintoma_13" min="0" max="1" step="1">
+            <span>DolorPecho</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_14" name="sintoma_14" min="0" max="1" step="1">
+            <span>Fatiga</span>
+        </label>
+        <label class="m-2 w-60">
+            <input required="" placeholder="" type="number" class="input" id="sintoma_15" name="sintoma_15" min="0" max="1" step="1">
+            <span>Mucosidades</span>
     </div>
     <p class="signin mt-4"><button class="submit">Guardar</button></p>
     <!-- <p class="signin">Already have an acount ? <a href="#">Signin</a> </p> -->

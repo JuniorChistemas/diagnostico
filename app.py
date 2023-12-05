@@ -1,6 +1,13 @@
 from flask import Flask
 from flask import render_template, request, redirect, Response, url_for, session
 from flask_mysqldb import MySQL,MySQLdb # pip install Flask-MySQLdb
+import numpy as np
+#from sklearn.preprocessing import StandardScaler
+from tensorflow.keras.models import load_model
+
+
+# Ruta al modelo descargado en tu entorno local
+ruta_modelo_local = 'modelo_enfermedades_regresion.h5'
 
 app = Flask(__name__,template_folder='views')
 
@@ -113,8 +120,39 @@ def crear_registro_paciente():
         mensaje = "Error al registrar paciente: " + str(e)
     finally:
         cur.close()
-
     return render_template("registropaciente.html", mensaje=mensaje, registro_exitoso=registro_exitoso)
+# funcion para predicir con la red neuronal
+
+@app.route('/predict', methods=['GET'])
+def predict():
+    #cargamos el modelo desarrollado en google colad
+    sintoma_1 = float(request.args.get('sintoma_1', 0.0))
+    sintoma_2 = float(request.args.get('sintoma_2', 0.0))
+    sintoma_3 = float(request.args.get('sintoma_3', 0.0))
+    sintoma_4 = float(request.args.get('sintoma_4', 0.0))
+    sintoma_5 = float(request.args.get('sintoma_5', 0.0))
+    sintoma_6 = float(request.args.get('sintoma_6', 0.0))
+    sintoma_7 = float(request.args.get('sintoma_7', 0.0))
+    sintoma_8 = float(request.args.get('sintoma_8', 0.0))
+    sintoma_9 = float(request.args.get('sintoma_9', 0.0))
+    sintoma_10 = float(request.args.get('sintoma_10', 0.0))
+    sintoma_11 = float(request.args.get('sintoma_11', 0.0))
+    sintoma_12 = float(request.args.get('sintoma_12', 0.0))
+    sintoma_13 = float(request.args.get('sintoma_13', 0.0))
+    sintoma_14 = float(request.args.get('sintoma_14', 0.0))
+    sintoma_15 = float(request.args.get('sintoma_15', 0.0))
+    model = load_model(ruta_modelo_local)
+    # Crear un array con los datos de entrada
+    input_data = np.array([[sintoma_1,sintoma_2,sintoma_3,sintoma_4,sintoma_5,sintoma_6,sintoma_7,sintoma_8,sintoma_9,sintoma_10,sintoma_11,sintoma_12,sintoma_13,sintoma_14,sintoma_15]])
+    # Realizar la predicción
+    prediction = model.predict(input_data)
+
+    # Si has normalizado los datos de salida, deshaz la normalización
+    # En este caso, supongo que tus datos de salida están en el rango de 0 a 10
+    prediction_original_scale = prediction * 10.0
+    
+    # Puedes hacer algo con la predicción, como mostrarla en una nueva página
+    return f'Predicción: {prediction_original_scale[0]}'
 
 
 
